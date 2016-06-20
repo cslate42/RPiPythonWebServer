@@ -19,7 +19,7 @@ import myThreading
 
 port = 80
 myGlobals.sio = socketio.Server(logger=True, async_mode=async_mode)
-myGlobals.app = Flask(__name__, static_folder='static', static_url_path='')
+myGlobals.app = Flask(__name__, static_folder='static', static_url_path='', host='0.0.0.0', port=port)
 myGlobals.app.wsgi_app = socketio.Middleware(myGlobals.sio, myGlobals.app.wsgi_app)
 myGlobals.app.config['SECRET_KEY'] = 'secret!'
 
@@ -47,4 +47,4 @@ importDirectory('my_socketio', _tmp_sio)
 
 # -----------------------__RUN__--------------------------
 
-myGlobals.app.run(host='0.0.0.0', port=port)
+# myGlobals.app.run(host='0.0.0.0', port=port)
