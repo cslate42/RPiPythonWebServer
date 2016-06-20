@@ -9,8 +9,9 @@ elif async_mode == 'gevent':
     monkey.patch_all()
 
 from flask import Flask, render_template
+from flask_socketio import SocketIO
 
-import socketio
+# import socketio
 import fnmatch
 import os
 
@@ -18,10 +19,11 @@ import myGlobals
 import myThreading
 
 port = 80
-myGlobals.sio = socketio.Server(logger=True, async_mode=async_mode)
-myGlobals.app = Flask(__name__, static_folder='static', static_url_path='', host='0.0.0.0', port=port)
-myGlobals.app.wsgi_app = socketio.Middleware(myGlobals.sio, myGlobals.app.wsgi_app)
+# myGlobals.sio = socketio.Server(logger=True, async_mode=async_mode)
+myGlobals.app = Flask(__name__, static_folder='static', static_url_path='')
+# myGlobals.app.wsgi_app = socketio.Middleware(myGlobals.sio, myGlobals.app.wsgi_app)
 myGlobals.app.config['SECRET_KEY'] = 'secret!'
+myGlobals.sio = SocketIO(logger=True, async_mode=async_mode)
 
 def importDirectory(baseDir, importName):
     """
@@ -47,4 +49,26 @@ importDirectory('my_socketio', _tmp_sio)
 
 # -----------------------__RUN__--------------------------
 
-# myGlobals.app.run(host='0.0.0.0', port=port)
+if __name__ == "__main__":
+    myGlobals.sio.run(myGlobals.app, host="0.0.0.0", port=80)
+    # if async_mode == 'threading':
+    #     # deploy with Werkzeug
+    #     myGlobals.app.run(threaded=True)
+    # elif async_mode == 'eventlet':
+    #     # deploy with eventlet
+    #     import eventlet
+    #     eventlet.wsgi.server(eventlet.listen(('', app.port)), myGlobals.app)
+    # elif async_mode == 'gevent':
+    #     # deploy with gevent
+    #     from gevent import pywsgi
+    #     try:
+    #         from geventwebsocket.handler import WebSocketHandler
+    #         websocket = True
+    #     except ImportError:
+    #         websocket = False
+    #     if websocket:
+    #         pywsgi.WSGIServer(('', port), myGlobals.app, handler_class=WebSocketHandler).serve_forever()
+    #     else:
+    #         pywsgi.WSGIServer(('', port), myGlobals.app).serve_forever()
+    # else:
+    #     print('Unknown async_mode: ' + async_mode)
