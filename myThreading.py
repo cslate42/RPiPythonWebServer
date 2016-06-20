@@ -14,6 +14,7 @@ def background_thread():
         time.sleep(10)
         count += 1
         myGlobals.sio.emit('my response', {'data': 'Server generated event'}, namespace='/test')
+        break
 
 def prepareThreads():
     """
