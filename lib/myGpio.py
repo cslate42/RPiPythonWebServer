@@ -24,6 +24,7 @@ def write(pin, state):
     @param int pin
     @param bool state
     """
+    print("GPIO WRITE", pin, state)
     GPIO.output(pin, state)
 
 import atexit

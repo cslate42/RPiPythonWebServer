@@ -14,15 +14,13 @@ import app
 import myGlobals
 
 if __name__ == "__main__":
-    port = 80
-    myGlobals.app.run(host='0.0.0.0', port=port)
     if async_mode == 'threading':
         # deploy with Werkzeug
         myGlobals.app.run(threaded=True)
     elif async_mode == 'eventlet':
         # deploy with eventlet
         import eventlet
-        eventlet.wsgi.server(eventlet.listen(('', port)), myGlobals.app)
+        eventlet.wsgi.server(eventlet.listen(('', app.port)), myGlobals.app)
     elif async_mode == 'gevent':
         # deploy with gevent
         from gevent import pywsgi
