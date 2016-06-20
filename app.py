@@ -23,7 +23,8 @@ port = 80
 myGlobals.app = Flask(__name__, static_folder='static', static_url_path='')
 # myGlobals.app.wsgi_app = socketio.Middleware(myGlobals.sio, myGlobals.app.wsgi_app)
 myGlobals.app.config['SECRET_KEY'] = 'secret!'
-myGlobals.sio = socketio(logger=True, async_mode=async_mode)
+# myGlobals.sio = socketio(logger=True, async_mode=async_mode)
+myGlobals.sio = socketio.Server()
 
 def importDirectory(baseDir, importName):
     """
