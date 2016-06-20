@@ -9,9 +9,9 @@ elif async_mode == 'gevent':
     monkey.patch_all()
 
 from flask import Flask, render_template
-from flask_socketio import SocketIO
+# from flask_socketio import SocketIO
 
-# import socketio
+import socketio
 import fnmatch
 import os
 
@@ -23,7 +23,7 @@ port = 80
 myGlobals.app = Flask(__name__, static_folder='static', static_url_path='')
 # myGlobals.app.wsgi_app = socketio.Middleware(myGlobals.sio, myGlobals.app.wsgi_app)
 myGlobals.app.config['SECRET_KEY'] = 'secret!'
-myGlobals.sio = SocketIO(logger=True, async_mode=async_mode)
+myGlobals.sio = socketio(logger=True, async_mode=async_mode)
 
 def importDirectory(baseDir, importName):
     """
@@ -50,7 +50,15 @@ importDirectory('my_socketio', _tmp_sio)
 # -----------------------__RUN__--------------------------
 
 if __name__ == "__main__":
-    myGlobals.sio.run(myGlobals.app, host="0.0.0.0", port=80)
+    # myGlobals.sio.run(myGlobals.app, host="0.0.0.0", port=80)
+
+
+    # wrap Flask application with engineio's middleware
+    app = socketio.Middleware(myGlobals.sio, myGlobals.app)
+
+    # deploy as an eventlet WSGI server
+    eventlet.wsgi.server(eventlet.listen(('', 80)), app)
+
     # if async_mode == 'threading':
     #     # deploy with Werkzeug
     #     myGlobals.app.run(threaded=True)
