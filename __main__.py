@@ -15,6 +15,7 @@ import myGlobals
 
 if __name__ == "__main__":
     port = 80
+    myGlobals.app.run(host='0.0.0.0', port=port)
     if async_mode == 'threading':
         # deploy with Werkzeug
         myGlobals.app.run(threaded=True)
