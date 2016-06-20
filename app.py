@@ -10,8 +10,9 @@ elif async_mode == 'gevent':
 
 from flask import Flask, render_template
 # from flask_socketio import SocketIO
-
 import socketio
+import eventlet
+
 import fnmatch
 import os
 
