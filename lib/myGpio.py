@@ -24,6 +24,7 @@ def write(pin, state):
     @param int pin
     @param bool state
     """
+    gpioState = GPIO.HIGH if state === True else GPIO.LOW
     print("GPIO WRITE", pin, state)
     GPIO.output(pin, state)
 
