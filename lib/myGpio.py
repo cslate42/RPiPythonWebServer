@@ -34,7 +34,7 @@ def write(pin, state):
     @param bool state
     """
     # print("GPIO WRITE", pin, state, gpioState)
-    if( ! pwm[pin] ):
+    if( not pwm[pin] ):
         gpioState = GPIO.HIGH if state == True or state == 1 or state == "1" else GPIO.LOW
         GPIO.output(pin, gpioState)
     return
