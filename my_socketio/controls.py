@@ -39,8 +39,8 @@ def updateControls(sid, message):
         myGPIO.write(3, 1)
     else:
         myGPIO.write(3, 0)
-
-}
+        
+    return
 
 
 def chassisForwardLeft():
