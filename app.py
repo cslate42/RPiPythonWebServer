@@ -52,7 +52,7 @@ importDirectory('my_socketio', _tmp_sio)
 @myGlobals.app.route('/asdf')
 def index():
     myThreading.prepareThreads()
-    return render_template('index.html')
+    return render_template('controls.html')
 
 # -----------------------__RUN__--------------------------
 
@@ -60,29 +60,29 @@ if __name__ == "__main__":
     # myGlobals.sio.run(myGlobals.app, host="0.0.0.0", port=80)
 
     # wrap Flask application with engineio's middleware
-    # app = socketio.Middleware(myGlobals.sio, myGlobals.app)
+    myGlobals.app = socketio.Middleware(myGlobals.sio, myGlobals.app)
 
     # deploy as an eventlet WSGI server
-    # eventlet.wsgi.server(eventlet.listen(('', port)), app)
+    eventlet.wsgi.server(eventlet.listen(('', port)), myGlobals.app)
 
-    if async_mode == 'threading':
-        # deploy with Werkzeug
-        myGlobals.app.run(threaded=True, port=port, host='0.0.0.0')
-    elif async_mode == 'eventlet':
-        # deploy with eventlet
-        import eventlet
-        eventlet.wsgi.server(eventlet.listen(('', port)), myGlobals.app)
-    elif async_mode == 'gevent':
-        # deploy with gevent
-        from gevent import pywsgi
-        try:
-            from geventwebsocket.handler import WebSocketHandler
-            websocket = True
-        except ImportError:
-            websocket = False
-        if websocket:
-            pywsgi.WSGIServer(('', port), myGlobals.app, handler_class=WebSocketHandler).serve_forever()
-        else:
-            pywsgi.WSGIServer(('', port), myGlobals.app).serve_forever()
-    else:
-        print('Unknown async_mode: ' + async_mode)
+    # if async_mode == 'threading':
+    #     # deploy with Werkzeug
+    #     myGlobals.app.run(threaded=True, port=port, host='0.0.0.0')
+    # elif async_mode == 'eventlet':
+    #     # deploy with eventlet
+    #     import eventlet
+    #     eventlet.wsgi.server(eventlet.listen(('', port)), myGlobals.app)
+    # elif async_mode == 'gevent':
+    #     # deploy with gevent
+    #     from gevent import pywsgi
+    #     try:
+    #         from geventwebsocket.handler import WebSocketHandler
+    #         websocket = True
+    #     except ImportError:
+    #         websocket = False
+    #     if websocket:
+    #         pywsgi.WSGIServer(('', port), myGlobals.app, handler_class=WebSocketHandler).serve_forever()
+    #     else:
+    #         pywsgi.WSGIServer(('', port), myGlobals.app).serve_forever()
+    # else:
+    #     print('Unknown async_mode: ' + async_mode)
