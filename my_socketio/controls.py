@@ -36,13 +36,13 @@ def updateControls(sid, message):
 
     # -----------------------------LED TEST----------------------------
     if( keysPressed.get('a') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 2, .25)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, .25)
     elif( keysPressed.get('s') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 2, .5)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, .5)
     elif( keysPressed.get('d') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 2, .75)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, .75)
     elif( keysPressed.get('f') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 2, 1)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 1)
     elif( keysPressed.get('j') ):
         myGpio.pwmStop(myGpio.MOTOR_L_F)
     # if( keysPressed.get('a') ):
