@@ -12,29 +12,29 @@ def updateControls(sid, message):
     keysPressed = message['keysPressed'] if message['keysPressed'] else {}
     print(keysPressed, message, message['keysPressed'], message.get('keysPressed'))
     # ------------------CHASSIS CONTROLS---------------------------------
-    if( keysPressed['ArrowUp'] and keysPressed['ArrowLeft'] ):
+    if( keysPressed.get('ArrowUp'] and keysPressed.get('ArrowLeft') ):
         chassisForwardLeft()
-    elif( keysPressed['ArrowUp'] and keysPressed['ArrowRight'] ):
+    elif( keysPressed.get('ArrowUp') and keysPressed.get('ArrowRight') ):
         chassisForwardRight()
-    elif( keysPressed['ArrowDown'] and keysPressed['ArrowLeft'] ):
+    elif( keysPressed.get('ArrowDown') and keysPressed.get('ArrowLeft') ):
         chassisBackwardLeft()
-    elif( keysPressed['ArrowDown'] and keysPressed['ArrowRight'] ):
+    elif( keysPressed.get('ArrowDown') and keysPressed.get('ArrowRight') ):
         chassisBackwardRight()
-    elif ( (keysPressed['ArrowUp'] and keysPressed['ArrowDown']) or (keysPressed['ArrowLeft'] and keysPressed['ArrowRight']) ):
+    elif ( (keysPressed.get('ArrowUp') and keysPressed.get('ArrowDown')) or (keysPressed.get('ArrowLeft') and keysPressed.get('ArrowRight')) ):
         chassisStop()
-    elif ( keysPressed['ArrowUp'] ):
+    elif ( keysPressed.get('ArrowUp') ):
         chassisForward()
-    elif ( keysPressed['ArrowRight'] ):
+    elif ( keysPressed.get('ArrowRight') ):
         chassisRight()
-    elif ( keysPressed['ArrowDown'] ):
+    elif ( keysPressed.get('ArrowDown') ):
         chassisBackward()
-    elif ( keysPressed['ArrowLeft'] ):
+    elif ( keysPressed.get('ArrowLeft') ):
         chassisLeft()
     else:
         chassisStop()
 
     # -----------------------------LED TEST----------------------------
-    if( keysPressed['a'] ):
+    if( keysPressed.get('a') ):
         myGPIO.write(3, 1)
     else:
         myGPIO.write(3, 0)
