@@ -9,6 +9,8 @@ MOTOR_R_F = 37
 MOTOR_R_B = 38
 LED_TEST = 3
 
+pwmPins = {}
+
 def setup():
     GPIO.setmode(GPIO.BOARD)
 
