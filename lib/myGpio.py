@@ -5,6 +5,7 @@ MOTOR_L_F = 35
 MOTOR_L_B = 36
 MOTOR_R_F = 37
 MOTOR_R_B = 38
+LED_TEST = 3
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -12,11 +13,13 @@ GPIO.setup(MOTOR_L_F, GPIO.OUT)
 GPIO.setup(MOTOR_L_B, GPIO.OUT)
 GPIO.setup(MOTOR_R_F, GPIO.OUT)
 GPIO.setup(MOTOR_R_B, GPIO.OUT)
+GPIO.setup(LED_TEST, GPIO.OUT)
 
 GPIO.output(MOTOR_L_F, False)
 GPIO.output(MOTOR_L_B, False)
 GPIO.output(MOTOR_R_F, False)
 GPIO.output(MOTOR_R_B, False)
+GPIO.output(LED_TEST, False)
 #===============================+END SETUP+=============================
 def write(pin, state):
     """
@@ -27,6 +30,7 @@ def write(pin, state):
     gpioState = GPIO.HIGH if state == True or state == 1 or state == "1" else GPIO.LOW
     print("GPIO WRITE", pin, state, gpioState)
     GPIO.output(pin, gpioState)
+    return
 
 import atexit
 @atexit.register

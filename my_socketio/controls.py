@@ -8,10 +8,9 @@ import lib.myGpio as myGpio
 @myGlobals.sio.on('update-controls', namespace='/socketio')
 def updateControls(sid, message):
     myGlobals.sio.emit('update-controls-results', {'message': message, 'sid': sid}, namespace='/socketio')
-
     keysPressed = message['keysPressed'] if message['keysPressed'] else {}
-    print(keysPressed, message, message['keysPressed'], message.get('keysPressed'))
-    # ------------------CHASSIS CONTROLS---------------------------------
+
+    # ---------------------------------------CHASSIS CONTROLS--------------------------------------------------------
     if( keysPressed.get('ArrowUp') and keysPressed.get('ArrowLeft') ):
         chassisForwardLeft()
     elif( keysPressed.get('ArrowUp') and keysPressed.get('ArrowRight') ):
