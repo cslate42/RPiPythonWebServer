@@ -1,4 +1,4 @@
-# https://sourceforge.net/p/raspberry-gpio-python/wiki/PWM/
+# https://sourceforge.net/p/raspberry-gpio-python/wiki/pwmPins/
 
 import RPi.GPIO as GPIO
 
@@ -25,7 +25,7 @@ GPIO.output(MOTOR_R_F, False)
 GPIO.output(MOTOR_R_B, False)
 GPIO.output(LED_TEST, False)
 
-pwm = {}
+pwmPins = {}
 #===============================+END SETUP+=============================
 def write(pin, state):
     """
@@ -34,37 +34,37 @@ def write(pin, state):
     @param bool state
     """
     # print("GPIO WRITE", pin, state, gpioState)
-    if( not pwm.get(pin) ):
+    if( not pwmPins.get(pin) ):
         gpioState = GPIO.HIGH if state == True or state == 1 or state == "1" else GPIO.LOW
         GPIO.output(pin, gpioState)
     return
 
-def pwm(pin, freq, dutyCycle):
+def pwmPinsUpdate(pin, freq, dutyCycle):
     """
-    Start pwm on pin
+    Start pwmPins on pin
     @param int pin
     @param float freq
         in Hz
     @param float dutyCycle
         must be between 0-1
     """
-    if( pwm.get(pin) ):
-        pwm[pin] = GPIO.PWM(pin, freq)
-        pwm.get(pin).start(dutyCycle)
+    if( pwmPins.get(pin) ):
+        pwmPins[pin] = GPIO.pwmPins(pin, freq)
+        pwmPins.get(pin).start(dutyCycle)
     else:
-        pwm.get(pin).ChangeDutyCycle(dutyCycle)
-        pwm.get(pin).ChangeFrequency(freq)
+        pwmPins.get(pin).ChangeDutyCycle(dutyCycle)
+        pwmPins.get(pin).ChangeFrequency(freq)
 
     return
 
-def pwmStop(pin):
+def pwmPinsStop(pin):
     """
-    Stop PWM then remove from dictionary
+    Stop pwmPins then remove from dictionary
     @param int pin
     """
-    if( pwm.get(pin) ):
-        pwm.get(pin).stop()
-        del pwm[pin]
+    if( pwmPins.get(pin) ):
+        pwmPins.get(pin).stop()
+        del pwmPins[pin]
     return
 
 import atexit
