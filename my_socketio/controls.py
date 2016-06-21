@@ -12,7 +12,7 @@ def updateControls(sid, message):
     keysPressed = message['keysPressed'] if message['keysPressed'] else {}
     print(keysPressed, message, message['keysPressed'], message.get('keysPressed'))
     # ------------------CHASSIS CONTROLS---------------------------------
-    if( keysPressed.get('ArrowUp'] and keysPressed.get('ArrowLeft') ):
+    if( keysPressed.get('ArrowUp') and keysPressed.get('ArrowLeft') ):
         chassisForwardLeft()
     elif( keysPressed.get('ArrowUp') and keysPressed.get('ArrowRight') ):
         chassisForwardRight()
@@ -20,7 +20,8 @@ def updateControls(sid, message):
         chassisBackwardLeft()
     elif( keysPressed.get('ArrowDown') and keysPressed.get('ArrowRight') ):
         chassisBackwardRight()
-    elif ( (keysPressed.get('ArrowUp') and keysPressed.get('ArrowDown')) or (keysPressed.get('ArrowLeft') and keysPressed.get('ArrowRight')) ):
+    elif ( (keysPressed.get('ArrowUp') and keysPressed.get('ArrowDown'))
+            or (keysPressed.get('ArrowLeft') and keysPressed.get('ArrowRight')) ):
         chassisStop()
     elif ( keysPressed.get('ArrowUp') ):
         chassisForward()
