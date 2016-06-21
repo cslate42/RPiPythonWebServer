@@ -12,6 +12,7 @@ from flask import Flask, render_template
 # from flask_socketio import SocketIO
 import socketio
 import eventlet
+from eventlet import wsgi
 
 import fnmatch
 import os
@@ -59,7 +60,7 @@ if __name__ == "__main__":
     app = socketio.Middleware(myGlobals.sio, myGlobals.app)
 
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('', 80)), app)
+    eventlet.wsgi.server(eventlet.listen(('', port)), app)
 
     # if async_mode == 'threading':
     #     # deploy with Werkzeug
