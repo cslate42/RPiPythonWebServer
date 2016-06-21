@@ -1,7 +1,7 @@
 from threading import Thread
 import time
 
-import app
+# import app
 import myGlobals
 
 thread = None
@@ -11,7 +11,7 @@ def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0
     while True:
-        time.sleep(10)
+        time.sleep(1)
         count += 1
         myGlobals.sio.emit('my response', {'data': 'Server generated event'}, namespace='/test')
         break
