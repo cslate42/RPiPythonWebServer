@@ -10,9 +10,7 @@ def updateControls(sid, message):
     myGlobals.sio.emit('update-controls-results', {'message': message, 'sid': sid}, namespace='/socketio')
     myGpio.write(myGpio.MOTOR_L_F, True)
 
-
-global.socketIoClients['update-controls'] = def (client, data) {
-    keysPressed = data['keysPressed'] ? data['keysPressed'] : [];
+    keysPressed = message['keysPressed'] if message['keysPressed'] else []
 
     # ------------------CHASSIS CONTROLS---------------------------------
     if( keysPressed['ArrowUp'] && keysPressed['ArrowLeft'] ) {
