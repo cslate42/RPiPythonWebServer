@@ -58,7 +58,7 @@ def pwmPinsUpdate(pin, freq, dutyCycle):
     @param float dutyCycle
         (0.0 <= dc <= 100.0)
     """
-    print("pwmPinsUpdate", pin, freq, dutyCycle, pwmPins.get(pin))
+    # print("pwmPinsUpdate", pin, freq, dutyCycle, pwmPins.get(pin))
     if( pwmPins.get(pin) == None ):
         pwmPins[pin] = GPIO.PWM(pin, freq)
         pwmPins.get(pin).start(dutyCycle)
@@ -74,7 +74,7 @@ def pwmPinsStop(pin):
     @param int pin
     """
     if( pwmPins.get(pin) ):
-        print("STOPPING", pin)
+        # print("STOPPING", pin)
         pwmPins.get(pin).stop()
         del pwmPins[pin]
     return
