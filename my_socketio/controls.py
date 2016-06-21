@@ -21,7 +21,7 @@ def updateControls(sid, message):
     elif( keysPressed.get('ArrowDown') and keysPressed.get('ArrowRight') ):
         chassisBackwardRight()
     elif ( (keysPressed.get('ArrowUp') and keysPressed.get('ArrowDown'))
-            or (keysPressed.get('ArrowLeft') and keysPressed.get('ArrowRight')) ):
+            sor (keysPressed.get('ArrowLeft') and keysPressed.get('ArrowRight')) ):
         chassisStop()
     elif ( keysPressed.get('ArrowUp') ):
         chassisForward()
@@ -36,70 +36,70 @@ def updateControls(sid, message):
 
     # -----------------------------LED TEST----------------------------
     if( keysPressed.get('a') ):
-        myGPIO.write(3, 1)
+        myGpio.write(3, 1)
     else:
-        myGPIO.write(3, 0)
+        myGpio.write(3, 0)
 
     return
 
 
 def chassisForwardLeft():
     # TODO pwm
-    myGPIO.write(myGPIO.MOTOR_L_B, 0)
-    myGPIO.write(myGPIO.MOTOR_L_F, 0)
-    myGPIO.write(myGPIO.MOTOR_R_B, 0)
-    myGPIO.write(myGPIO.MOTOR_R_F, 0)
+    myGpio.write(myGpio.MOTOR_L_B, 0)
+    myGpio.write(myGpio.MOTOR_L_F, 0)
+    myGpio.write(myGpio.MOTOR_R_B, 0)
+    myGpio.write(myGpio.MOTOR_R_F, 0)
 
 def chassisForwardRight():
     # TODO pwm
-    myGPIO.write(myGPIO.MOTOR_L_B, 1)
-    myGPIO.write(myGPIO.MOTOR_L_F, 0)
-    myGPIO.write(myGPIO.MOTOR_R_B, 0)
-    myGPIO.write(myGPIO.MOTOR_R_F, 1)
+    myGpio.write(myGpio.MOTOR_L_B, 1)
+    myGpio.write(myGpio.MOTOR_L_F, 0)
+    myGpio.write(myGpio.MOTOR_R_B, 0)
+    myGpio.write(myGpio.MOTOR_R_F, 1)
 
 def chassisBackwardLeft():
     #TODO pwm
-    myGPIO.write(myGPIO.MOTOR_L_B, 1)
-    myGPIO.write(myGPIO.MOTOR_L_F, 0)
-    myGPIO.write(myGPIO.MOTOR_R_B, 0)
-    myGPIO.write(myGPIO.MOTOR_R_F, 1)
+    myGpio.write(myGpio.MOTOR_L_B, 1)
+    myGpio.write(myGpio.MOTOR_L_F, 0)
+    myGpio.write(myGpio.MOTOR_R_B, 0)
+    myGpio.write(myGpio.MOTOR_R_F, 1)
 
 def chassisBackwardRight():
     #TODO pwm
-    myGPIO.write(myGPIO.MOTOR_L_B, 1)
-    myGPIO.write(myGPIO.MOTOR_L_F, 0)
-    myGPIO.write(myGPIO.MOTOR_R_B, 0)
-    myGPIO.write(myGPIO.MOTOR_R_F, 1)
+    myGpio.write(myGpio.MOTOR_L_B, 1)
+    myGpio.write(myGpio.MOTOR_L_F, 0)
+    myGpio.write(myGpio.MOTOR_R_B, 0)
+    myGpio.write(myGpio.MOTOR_R_F, 1)
 
 def chassisForward():
-    myGPIO.write(myGPIO.MOTOR_L_B, 0)
-    myGPIO.write(myGPIO.MOTOR_L_F, 1)
-    myGPIO.write(myGPIO.MOTOR_R_B, 0)
-    myGPIO.write(myGPIO.MOTOR_R_F, 1)
+    myGpio.write(myGpio.MOTOR_L_B, 0)
+    myGpio.write(myGpio.MOTOR_L_F, 1)
+    myGpio.write(myGpio.MOTOR_R_B, 0)
+    myGpio.write(myGpio.MOTOR_R_F, 1)
 
 def chassisRight():
-    myGPIO.write(myGPIO.MOTOR_L_B, 0)
-    myGPIO.write(myGPIO.MOTOR_L_F, 1)
-    myGPIO.write(myGPIO.MOTOR_R_B, 1)
-    myGPIO.write(myGPIO.MOTOR_R_F, 0)
+    myGpio.write(myGpio.MOTOR_L_B, 0)
+    myGpio.write(myGpio.MOTOR_L_F, 1)
+    myGpio.write(myGpio.MOTOR_R_B, 1)
+    myGpio.write(myGpio.MOTOR_R_F, 0)
 
 def chassisBackward():
-    myGPIO.write(myGPIO.MOTOR_L_B, 1)
-    myGPIO.write(myGPIO.MOTOR_L_F, 0)
-    myGPIO.write(myGPIO.MOTOR_R_B, 1)
-    myGPIO.write(myGPIO.MOTOR_R_F, 0)
+    myGpio.write(myGpio.MOTOR_L_B, 1)
+    myGpio.write(myGpio.MOTOR_L_F, 0)
+    myGpio.write(myGpio.MOTOR_R_B, 1)
+    myGpio.write(myGpio.MOTOR_R_F, 0)
 
 def chassisLeft():
-    myGPIO.write(myGPIO.MOTOR_L_B, 1)
-    myGPIO.write(myGPIO.MOTOR_L_F, 0)
-    myGPIO.write(myGPIO.MOTOR_R_B, 0)
-    myGPIO.write(myGPIO.MOTOR_R_F, 1)
+    myGpio.write(myGpio.MOTOR_L_B, 1)
+    myGpio.write(myGpio.MOTOR_L_F, 0)
+    myGpio.write(myGpio.MOTOR_R_B, 0)
+    myGpio.write(myGpio.MOTOR_R_F, 1)
 
 def chassisStop():
-    myGPIO.write(myGPIO.MOTOR_L_B, 0)
-    myGPIO.write(myGPIO.MOTOR_L_F, 0)
-    myGPIO.write(myGPIO.MOTOR_R_B, 0)
-    myGPIO.write(myGPIO.MOTOR_R_F, 0)
+    myGpio.write(myGpio.MOTOR_L_B, 0)
+    myGpio.write(myGpio.MOTOR_L_F, 0)
+    myGpio.write(myGpio.MOTOR_R_B, 0)
+    myGpio.write(myGpio.MOTOR_R_F, 0)
 
 # @myGlobals.app.route('/controls')
 # def control():
