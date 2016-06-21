@@ -25,8 +25,8 @@ def write(pin, state):
     @param bool state
     """
     gpioState = GPIO.HIGH if state === True else GPIO.LOW
-    print("GPIO WRITE", pin, state)
-    GPIO.output(pin, state)
+    print("GPIO WRITE", pin, state, gpioState)
+    GPIO.output(pin, gpioState)
 
 import atexit
 @atexit.register
