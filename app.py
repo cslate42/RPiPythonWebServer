@@ -63,7 +63,7 @@ if __name__ == "__main__":
 
     if async_mode == 'threading':
         # deploy with Werkzeug
-        myGlobals.app.run(threaded=True)
+        myGlobals.app.run(threaded=True, port=port)
     elif async_mode == 'eventlet':
         # deploy with eventlet
         import eventlet
