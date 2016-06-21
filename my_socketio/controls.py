@@ -34,7 +34,7 @@ def updateControls(sid, message):
     else:
         chassisStop()
 
-    //-----------------------------LED TEST----------------------------
+    # -----------------------------LED TEST----------------------------
     if( keysPressed['a'] ):
         myGPIO.write(3, 1)
     else {
