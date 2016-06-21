@@ -49,11 +49,11 @@ def pwmPinsUpdate(pin, freq, dutyCycle):
         must be between 0-1
     """
     if( pwmPins.get(pin) ):
-        pwmPins[pin] = GPIO.pwmPins(pin, freq)
-        pwmPins.get(pin).start(dutyCycle)
-    else:
         pwmPins.get(pin).ChangeDutyCycle(dutyCycle)
         pwmPins.get(pin).ChangeFrequency(freq)
+    else:
+        pwmPins[pin] = GPIO.pwmPins(pin, freq)
+        pwmPins.get(pin).start(dutyCycle)
 
     return
 
