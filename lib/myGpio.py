@@ -82,7 +82,7 @@ def pwmPinsStop(pin):
 
 def reset():
     GPIO.cleanup()
-    # setup()
+    setup()
     return
 
 import atexit
