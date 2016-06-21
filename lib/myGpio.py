@@ -16,7 +16,7 @@ GPIO.setup(MOTOR_R_B, GPIO.OUT)
 GPIO.output(MOTOR_L_F, False)
 GPIO.output(MOTOR_L_B, False)
 GPIO.output(MOTOR_R_F, False)
-GPIO.output(MOTOR_R_B, True)
+GPIO.output(MOTOR_R_B, False)
 #===============================+END SETUP+=============================
 def write(pin, state):
     """

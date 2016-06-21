@@ -7,7 +7,7 @@ import lib.myGpio as myGpio
 
 @myGlobals.sio.on('update-controls', namespace='/socketio')
 def updateControls(sid, message):
-    myGlobals.sio.emit('update-controls-results', {'data': None}, namespace='/socketio')
+    myGlobals.sio.emit('update-controls-results', {'message': message, 'sid': sid}, namespace='/socketio')
     myGpio.write(myGpio.MOTOR_L_F, True)
 
 # @myGlobals.app.route('/controls')
