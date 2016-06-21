@@ -12,7 +12,7 @@ from flask import Flask, render_template
 # from flask_socketio import SocketIO
 import socketio
 import eventlet
-from eventlet import wsgi
+# from eventlet import wsgi
 
 import fnmatch
 import os
@@ -60,10 +60,10 @@ if __name__ == "__main__":
     # myGlobals.sio.run(myGlobals.app, host="0.0.0.0", port=80)
 
     # wrap Flask application with engineio's middleware
-    myGlobals.app = socketio.Middleware(myGlobals.sio, myGlobals.app)
+    app = socketio.Middleware(myGlobals.sio, myGlobals.app)
 
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('', port)), myGlobals.app)
+    eventlet.wsgi.server(eventlet.listen(('', 80)), app)
 
     # if async_mode == 'threading':
     #     # deploy with Werkzeug
