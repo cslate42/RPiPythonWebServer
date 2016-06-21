@@ -13,15 +13,15 @@ def updateControls(sid, message):
     keysPressed = message['keysPressed'] if message['keysPressed'] else []
 
     # ------------------CHASSIS CONTROLS---------------------------------
-    if( keysPressed['ArrowUp'] && keysPressed['ArrowLeft'] ) {
+    if( keysPressed['ArrowUp'] and keysPressed['ArrowLeft'] ) {
         chassisForwardLeft();
-    } elif( keysPressed['ArrowUp'] && keysPressed['ArrowRight'] ) {
+    } elif( keysPressed['ArrowUp'] and keysPressed['ArrowRight'] ) {
         chassisForwardRight();
-    } elif( keysPressed['ArrowDown'] && keysPressed['ArrowLeft'] ) {
+    } elif( keysPressed['ArrowDown'] and keysPressed['ArrowLeft'] ) {
         chassisBackwardLeft();
-    } elif( keysPressed['ArrowDown'] && keysPressed['ArrowRight'] ) {
+    } elif( keysPressed['ArrowDown'] and keysPressed['ArrowRight'] ) {
         chassisBackwardRight();
-    } elif ( (keysPressed['ArrowUp'] && keysPressed['ArrowDown']) || (keysPressed['ArrowLeft'] && keysPressed['ArrowRight']) ) {
+    } elif ( (keysPressed['ArrowUp'] and keysPressed['ArrowDown']) || (keysPressed['ArrowLeft'] and keysPressed['ArrowRight']) ) {
         chassisStop();
     } elif ( keysPressed['ArrowUp'] ) {
         chassisForward();
