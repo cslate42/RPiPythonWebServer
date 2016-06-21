@@ -56,6 +56,7 @@ def pwmPinsUpdate(pin, freq, dutyCycle):
     @param float dutyCycle
         (0.0 <= dc <= 100.0)
     """
+    print("pwmPinsUpdate", pin, freq, dutyCycle, pwmPins.get(pin))
     if( pwmPins.get(pin) ):
         pwmPins.get(pin).ChangeDutyCycle(dutyCycle)
         pwmPins.get(pin).ChangeFrequency(freq)
