@@ -40,7 +40,7 @@ def importDirectory(baseDir, importName):
             #strip the extension
             module = name[:-3]
             # set the module name in the current global name space:
-            print("Importing:", os.path.join(basePath, module))
+            # print("Importing:", os.path.join(basePath, module))
             globals()[module] = __import__(os.path.join(baseDir, module).replace('/', '.') )
     return
 
