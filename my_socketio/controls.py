@@ -10,6 +10,7 @@ def updateControls(sid, message):
     myGlobals.sio.emit('update-controls-results', {'message': message, 'sid': sid}, namespace='/socketio')
     keysPressed = message['keysPressed'] if message['keysPressed'] else {}
 
+    print(keysPressed)
     # ---------------------------------------CHASSIS CONTROLS--------------------------------------------------------
     if( keysPressed.get('ArrowUp') and keysPressed.get('ArrowLeft') ):
         chassisForwardLeft()
