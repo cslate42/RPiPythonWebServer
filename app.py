@@ -49,6 +49,10 @@ importDirectory('routes', _tmp_routes)
 _tmp_sio = None
 importDirectory('my_socketio', _tmp_sio)
 
+@app.route('/asdf')
+def index():
+    myThreading.prepareThreads()
+    return render_template('index.html')
 
 # -----------------------__RUN__--------------------------
 
