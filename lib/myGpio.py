@@ -11,25 +11,24 @@ LED_TEST = 3
 
 pwmPins = {}
 
-# def setup():
-#     print("-------------------------_SETTING UP GPIO_----------------------------")
-GPIO.setmode(GPIO.BOARD)
+def setup():
+    print("-------------------------_SETTING UP GPIO_----------------------------")
+    GPIO.setmode(GPIO.BOARD)
 
-GPIO.setup(MOTOR_L_F, GPIO.OUT)
-GPIO.setup(MOTOR_L_B, GPIO.OUT)
-GPIO.setup(MOTOR_R_F, GPIO.OUT)
-GPIO.setup(MOTOR_R_B, GPIO.OUT)
-GPIO.setup(LED_TEST, GPIO.OUT)
+    GPIO.setup(MOTOR_L_F, GPIO.OUT)
+    GPIO.setup(MOTOR_L_B, GPIO.OUT)
+    GPIO.setup(MOTOR_R_F, GPIO.OUT)
+    GPIO.setup(MOTOR_R_B, GPIO.OUT)
+    GPIO.setup(LED_TEST, GPIO.OUT)
+    # GPIO.setup(butPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Button pin set as input w/ pull-up
 
-# GPIO.setup(butPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Button pin set as input w/ pull-up
-
-GPIO.output(MOTOR_L_F, False)
-GPIO.output(MOTOR_L_B, False)
-GPIO.output(MOTOR_R_F, False)
-GPIO.output(MOTOR_R_B, False)
-GPIO.output(LED_TEST, False)
-pwmPins.clear()
-# return
+    GPIO.output(MOTOR_L_F, False)
+    GPIO.output(MOTOR_L_B, False)
+    GPIO.output(MOTOR_R_F, False)
+    GPIO.output(MOTOR_R_B, False)
+    GPIO.output(LED_TEST, False)
+    pwmPins.clear()
+    return
 
 # setup()
 
