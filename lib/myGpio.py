@@ -11,8 +11,8 @@ LED_TEST = 3
 
 pwmPins = {}
 
-def setup():
-    print("-------------------------_SETTING UP GPIO_----------------------------")
+# def setup():
+#     print("-------------------------_SETTING UP GPIO_----------------------------")
 GPIO.setmode(GPIO.BOARD)
 
 GPIO.setup(MOTOR_L_F, GPIO.OUT)
@@ -42,11 +42,11 @@ def write(pin, state):
     """
     # print("GPIO WRITE", pin, state, gpioState)
     gpioState = GPIO.HIGH if state == True or state == 1 or state == "1" else GPIO.LOW
-    if( not pwmPins.get(pin) ):
+    if( pwmPins.get(pin) == None ):
         GPIO.output(pin, gpioState)
+        # pwmPins.get(pin).stop()
     else:
         GPIO.output(pin, gpioState)
-        pwmPins.get(pin).stop()
     return
 
 def pwmPinsUpdate(pin, freq, dutyCycle):
@@ -81,7 +81,7 @@ def pwmPinsStop(pin):
 
 def reset():
     GPIO.cleanup()
-    setup()
+    # setup()
     return
 
 import atexit
