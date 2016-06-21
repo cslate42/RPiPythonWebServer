@@ -21,7 +21,7 @@ def updateControls(sid, message):
     elif( keysPressed.get('ArrowDown') and keysPressed.get('ArrowRight') ):
         chassisBackwardRight()
     elif ( (keysPressed.get('ArrowUp') and keysPressed.get('ArrowDown'))
-            sor (keysPressed.get('ArrowLeft') and keysPressed.get('ArrowRight')) ):
+            or (keysPressed.get('ArrowLeft') and keysPressed.get('ArrowRight')) ):
         chassisStop()
     elif ( keysPressed.get('ArrowUp') ):
         chassisForward()
