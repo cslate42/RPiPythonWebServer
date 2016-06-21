@@ -49,7 +49,7 @@ def pwm(pin, freq, dutyCycle):
         must be between 0-1
     """
     if( pwm.get(pin) ):
-        pwm.get(pin) = GPIO.PWM(pin, freq)
+        pwm[pin] = GPIO.PWM(pin, freq)
         pwm.get(pin).start(dutyCycle)
     else:
         pwm.get(pin).ChangeDutyCycle(dutyCycle)
@@ -64,7 +64,7 @@ def pwmStop(pin):
     """
     if( pwm.get(pin) ):
         pwm.get(pin).stop()
-        del pwm.get(pin)
+        del pwm[pin]
     return
 
 import atexit
