@@ -9,23 +9,26 @@ MOTOR_R_F = 37
 MOTOR_R_B = 38
 LED_TEST = 3
 
-GPIO.setmode(GPIO.BOARD)
+def setup():
+    GPIO.setmode(GPIO.BOARD)
 
-GPIO.setup(MOTOR_L_F, GPIO.OUT)
-GPIO.setup(MOTOR_L_B, GPIO.OUT)
-GPIO.setup(MOTOR_R_F, GPIO.OUT)
-GPIO.setup(MOTOR_R_B, GPIO.OUT)
-GPIO.setup(LED_TEST, GPIO.OUT)
+    GPIO.setup(MOTOR_L_F, GPIO.OUT)
+    GPIO.setup(MOTOR_L_B, GPIO.OUT)
+    GPIO.setup(MOTOR_R_F, GPIO.OUT)
+    GPIO.setup(MOTOR_R_B, GPIO.OUT)
+    GPIO.setup(LED_TEST, GPIO.OUT)
 
-# GPIO.setup(butPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Button pin set as input w/ pull-up
+    # GPIO.setup(butPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Button pin set as input w/ pull-up
 
-GPIO.output(MOTOR_L_F, False)
-GPIO.output(MOTOR_L_B, False)
-GPIO.output(MOTOR_R_F, False)
-GPIO.output(MOTOR_R_B, False)
-GPIO.output(LED_TEST, False)
+    GPIO.output(MOTOR_L_F, False)
+    GPIO.output(MOTOR_L_B, False)
+    GPIO.output(MOTOR_R_F, False)
+    GPIO.output(MOTOR_R_B, False)
+    GPIO.output(LED_TEST, False)
 
-pwmPins = {}
+    pwmPins = {}
+    return
+setup()
 #===============================+END SETUP+=============================
 def write(pin, state):
     """
@@ -68,6 +71,11 @@ def pwmPinsStop(pin):
     if( pwmPins.get(pin) ):
         pwmPins.get(pin).stop()
         del pwmPins[pin]
+    return
+
+def reset():
+    GPIO.cleanup()
+    setup()
     return
 
 import atexit

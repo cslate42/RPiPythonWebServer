@@ -13,7 +13,7 @@ def updateControls(sid, message):
     # print(keysPressed)
     # ---------------------------------------OH SHIT BUTTON---------------------------------------------------------
     if( keysPressed.get('Escape') ):
-        myGpio.shutdown()
+        myGpio.reset()
     # ---------------------------------------CHASSIS CONTROLS--------------------------------------------------------
     if( keysPressed.get('ArrowUp') and keysPressed.get('ArrowLeft') ):
         chassisForwardLeft()
