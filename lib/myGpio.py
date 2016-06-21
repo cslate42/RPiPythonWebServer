@@ -30,7 +30,7 @@ def setup():
     pwmPins.clear()
     return
 
-# setup()
+setup()
 
 #===============================+END SETUP+=============================
 def write(pin, state):
