@@ -30,7 +30,9 @@ def setup():
 
     pwmPins = {}
     return
+
 setup()
+
 #===============================+END SETUP+=============================
 def write(pin, state):
     """
@@ -63,7 +65,7 @@ def pwmPinsUpdate(pin, freq, dutyCycle):
     else:
         pwmPins[pin] = GPIO.PWM(pin, freq)
         pwmPins.get(pin).start(dutyCycle)
-
+    
     return
 
 def pwmPinsStop(pin):
