@@ -41,11 +41,11 @@ def updateControls(sid, message):
     if( keysPressed.get('a') ):
         myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 50, 25)
     elif( keysPressed.get('s') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_B, 50, 25)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 50)
     elif( keysPressed.get('d') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 50, 75)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 150, 75)
     elif( keysPressed.get('f') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_B, 50, 75)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 200, 100)
     elif( keysPressed.get('j') ):
         myGpio.pwmPinsStop(myGpio.MOTOR_L_F)
     elif( keysPressed.get('k') ):
