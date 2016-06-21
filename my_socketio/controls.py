@@ -44,7 +44,7 @@ def updateControls(sid, message):
     elif( keysPressed.get('f') ):
         myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 100)
     elif( keysPressed.get('j') ):
-        myGpio.pwmStop(myGpio.MOTOR_L_F)
+        myGpio.pwmPinsStop(myGpio.MOTOR_L_F)
     # if( keysPressed.get('a') ):
     #     myGpio.write(3, 1)
     # else:
