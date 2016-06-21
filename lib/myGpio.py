@@ -52,7 +52,7 @@ def pwmPinsUpdate(pin, freq, dutyCycle):
         pwmPins.get(pin).ChangeDutyCycle(dutyCycle)
         pwmPins.get(pin).ChangeFrequency(freq)
     else:
-        pwmPins[pin] = GPIO.pwmPins(pin, freq)
+        pwmPins[pin] = GPIO.PWM(pin, freq)
         pwmPins.get(pin).start(dutyCycle)
 
     return
