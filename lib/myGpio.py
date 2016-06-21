@@ -34,7 +34,7 @@ def write(pin, state):
     @param bool state
     """
     # print("GPIO WRITE", pin, state, gpioState)
-    if( not pwm[pin] ):
+    if( not pwm.get(pin) ):
         gpioState = GPIO.HIGH if state == True or state == 1 or state == "1" else GPIO.LOW
         GPIO.output(pin, gpioState)
     return
@@ -48,12 +48,12 @@ def pwm(pin, freq, dutyCycle):
     @param float dutyCycle
         must be between 0-1
     """
-    if( pwm[pin] ):
-        pwm[pin] = GPIO.PWM(pin, freq)
-        pwm[pin].start(dutyCycle)
+    if( pwm.get(pin) ):
+        pwm.get(pin) = GPIO.PWM(pin, freq)
+        pwm.get(pin).start(dutyCycle)
     else:
-        pwm[pin].ChangeDutyCycle(dutyCycle)
-        pwm[pin].ChangeFrequency(freq)
+        pwm.get(pin).ChangeDutyCycle(dutyCycle)
+        pwm.get(pin).ChangeFrequency(freq)
 
     return
 
@@ -62,9 +62,9 @@ def pwmStop(pin):
     Stop PWM then remove from dictionary
     @param int pin
     """
-    if( pwm[pin] ):
-        pwm[pin].stop()
-        del pwm[pin]
+    if( pwm.get(pin) ):
+        pwm.get(pin).stop()
+        del pwm.get(pin)
     return
 
 import atexit
