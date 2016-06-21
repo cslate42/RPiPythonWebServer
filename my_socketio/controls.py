@@ -39,13 +39,13 @@ def updateControls(sid, message):
 
     # ---------------------------PWM TEST---------------------------------
     if( keysPressed.get('a') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 25)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 50, 25)
     elif( keysPressed.get('s') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 50)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_B, 50, 25)
     elif( keysPressed.get('d') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 75)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 50, 75)
     elif( keysPressed.get('f') ):
-        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 100)
+        myGpio.pwmPinsUpdate(myGpio.MOTOR_L_B, 50, 75)
     elif( keysPressed.get('j') ):
         myGpio.pwmPinsStop(myGpio.MOTOR_L_F)
 
