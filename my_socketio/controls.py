@@ -48,6 +48,8 @@ def updateControls(sid, message):
         myGpio.pwmPinsUpdate(myGpio.MOTOR_L_B, 50, 75)
     elif( keysPressed.get('j') ):
         myGpio.pwmPinsStop(myGpio.MOTOR_L_F)
+    elif( keysPressed.get('k') ):
+        myGpio.pwmPinsStop(myGpio.MOTOR_L_B)
 
     # -----------------------------LED TEST----------------------------
     # if( keysPressed.get('a') ):

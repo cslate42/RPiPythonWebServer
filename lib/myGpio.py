@@ -28,8 +28,7 @@ def setup():
     GPIO.output(MOTOR_R_F, False)
     GPIO.output(MOTOR_R_B, False)
     GPIO.output(LED_TEST, False)
-
-    pwmPins = {}
+    pwmPins.clear()
     return
 
 setup()
