@@ -1,5 +1,5 @@
 # set this to 'threading', 'eventlet', or 'gevent'
-async_mode = 'eventlet' #'threading'
+async_mode = 'threading'
 
 if async_mode == 'eventlet':
     import eventlet
@@ -54,7 +54,6 @@ importDirectory('my_socketio', _tmp_sio)
 
 if __name__ == "__main__":
     # myGlobals.sio.run(myGlobals.app, host="0.0.0.0", port=80)
-
 
     # wrap Flask application with engineio's middleware
     # app = socketio.Middleware(myGlobals.sio, myGlobals.app)
