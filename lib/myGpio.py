@@ -12,6 +12,7 @@ LED_TEST = 3
 pwmPins = {}
 
 def setup():
+    print("-------------------------_SETTING UP GPIO_----------------------------")
     GPIO.setmode(GPIO.BOARD)
 
     GPIO.setup(MOTOR_L_F, GPIO.OUT)
