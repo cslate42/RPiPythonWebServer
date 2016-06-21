@@ -10,7 +10,7 @@ def updateControls(sid, message):
     myGlobals.sio.emit('update-controls-results', {'message': message, 'sid': sid}, namespace='/socketio')
     keysPressed = message['keysPressed'] if message['keysPressed'] else {}
 
-    # print(keysPressed)
+    print(keysPressed)
     # ---------------------------------------OH SHIT BUTTON---------------------------------------------------------
     if( keysPressed.get('Escape') ):
         myGpio.reset()
@@ -37,7 +37,7 @@ def updateControls(sid, message):
     else:
         chassisStop()
 
-    # -----------------------------LED TEST----------------------------
+    # ---------------------------PWM TEST---------------------------------
     if( keysPressed.get('a') ):
         myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 25)
     elif( keysPressed.get('s') ):
@@ -48,6 +48,8 @@ def updateControls(sid, message):
         myGpio.pwmPinsUpdate(myGpio.MOTOR_L_F, 100, 100)
     elif( keysPressed.get('j') ):
         myGpio.pwmPinsStop(myGpio.MOTOR_L_F)
+
+    # -----------------------------LED TEST----------------------------
     # if( keysPressed.get('a') ):
     #     myGpio.write(3, 1)
     # else:
