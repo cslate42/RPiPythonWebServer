@@ -72,6 +72,7 @@ def pwmPinsStop(pin):
     @param int pin
     """
     if( pwmPins.get(pin) ):
+        print("STOPPING", pin)
         pwmPins.get(pin).stop()
         del pwmPins[pin]
     return
