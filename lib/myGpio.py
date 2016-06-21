@@ -46,7 +46,7 @@ def pwmPinsUpdate(pin, freq, dutyCycle):
     @param float freq
         in Hz
     @param float dutyCycle
-        must be between 0-1
+        (0.0 <= dc <= 100.0)
     """
     if( pwmPins.get(pin) ):
         pwmPins.get(pin).ChangeDutyCycle(dutyCycle)
