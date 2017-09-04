@@ -1,3 +1,0 @@
-
-sio = None
-app = None
