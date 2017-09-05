@@ -1,8 +1,11 @@
-# https://sourceforge.net/p/raspberry-gpio-python/wiki/pwmPins/
+"""
+Basic IO
+reference https://sourceforge.net/p/raspberry-gpio-python/wiki/pwmPins/
+"""
 
+import atexit
 import RPi.GPIO as GPIO
 
-#===============================+START SETUP+=============================
 MOTOR_L_F = 35
 MOTOR_L_B = 36
 MOTOR_R_F = 37
@@ -12,7 +15,10 @@ LED_TEST = 3
 pwmPins = {}
 
 def setup():
-    print("-------------------------_SETTING UP GPIO_----------------------------")
+    """
+    Setup the raspberry pi pins and interrupts
+    """
+    print "-------------------------SETTING UP GPIO----------------------------"
     GPIO.setmode(GPIO.BOARD)
 
     GPIO.setup(MOTOR_L_F, GPIO.OUT)
@@ -30,20 +36,17 @@ def setup():
     pwmPins.clear()
     return
 
-setup()
-
-#===============================+END SETUP+=============================
 def write(pin, state):
     """
     Write output GPIO pin to state MAKE SURE pin is setup before use
     @param int pin
     @param bool state
     """
-    if( GPIO.getmode() == None ):
+    if GPIO.getmode() is None:
         return False
     # print("GPIO WRITE", pin, state, gpioState)
-    gpioState = GPIO.HIGH if state == True or state == 1 or state == "1" else GPIO.LOW
-    if( pwmPins.get(pin) == None ):
+    gpioState = GPIO.HIGH if state is True or state == 1 or state == "1" else GPIO.LOW
+    if pwmPins.get(pin) is None:
         GPIO.output(pin, gpioState)
         # pwmPins.get(pin).stop()
     else:
@@ -60,7 +63,7 @@ def pwmPinsUpdate(pin, freq, dutyCycle):
         (0.0 <= dc <= 100.0)
     """
     # print("pwmPinsUpdate", pin, freq, dutyCycle, pwmPins.get(pin))
-    if( pwmPins.get(pin) == None ):
+    if pwmPins.get(pin) is None:
         pwmPins[pin] = GPIO.PWM(pin, freq)
         pwmPins.get(pin).start(dutyCycle)
     else:
@@ -74,22 +77,25 @@ def pwmPinsStop(pin):
     Stop pwmPins then remove from dictionary
     @param int pin
     """
-    if( pwmPins.get(pin) ):
+    if pwmPins.get(pin):
         # print("STOPPING", pin)
         pwmPins.get(pin).stop()
         del pwmPins[pin]
     return
 
 def reset():
+    """
+    Attempt to reset GPIO pins
+    Occationally had problems with resources not being freed up
+    """
     GPIO.cleanup()
     setup()
     return
 
-import atexit
 @atexit.register
 def shutdown():
     """
-    Shutdown GPIO
+    Shutdown GPIO and cleanup pin configs
     """
-    print("My shutdown GPIO")
+    print "My shutdown GPIO"
     GPIO.cleanup()
