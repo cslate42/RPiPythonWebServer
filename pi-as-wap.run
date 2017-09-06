@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# runs the pi as a WAP
+# DOES NOT WORK
+# https://raspberrypihq.com/how-to-turn-a-raspberry-pi-into-a-wifi-router/
