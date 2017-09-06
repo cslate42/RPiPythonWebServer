@@ -6,11 +6,25 @@ reference https://sourceforge.net/p/raspberry-gpio-python/wiki/pwmPins/
 import atexit
 import RPi.GPIO as GPIO
 
-MOTOR_L = 35
-MOTOR_R = 36
-LASER = 3 # todo
+MOTOR_L_F = 35
+MOTOR_L_B = 36
+MOTOR_R_F = 37
+MOTOR_R_B = 38
+
+PWM_LED = 11
 
 pwmPins = {}
+
+cameraPos = {
+    'xPin': 31,
+    'yPin': 32
+}
+
+def updateCameraPos(newX, newY):
+    """Function to update the new x and y axis of camera"""
+    pwmPinsUpdate(cameraPos.get('xPin'), 100, newX)
+    pwmPinsUpdate(cameraPos.get('yPin'), 100, newY)
+    return
 
 def setup():
     """
@@ -19,12 +33,19 @@ def setup():
     print "-------------------------SETTING UP GPIO----------------------------"
     GPIO.setmode(GPIO.BOARD)
 
-    GPIO.setup(MOTOR_L, GPIO.OUT)
-    GPIO.setup(MOTOR_R, GPIO.OUT)
+    GPIO.setup(MOTOR_L_F, GPIO.OUT)
+    GPIO.setup(MOTOR_L_B, GPIO.OUT)
+    GPIO.setup(MOTOR_R_F, GPIO.OUT)
+    GPIO.setup(MOTOR_R_B, GPIO.OUT)
+    GPIO.setup(PWM_LED, GPIO.OUT)
 
-    GPIO.output(MOTOR_L, False)
-    GPIO.output(MOTOR_R, False)
-    GPIO.output(LASER, False)
+    GPIO.output(MOTOR_L_F, False)
+    GPIO.output(MOTOR_L_B, False)
+    GPIO.output(MOTOR_R_F, False)
+    GPIO.output(MOTOR_R_B, False)
+    GPIO.output(PWM_LED, True)
+    while True:
+        continue
 
     pwmPins.clear()
     return

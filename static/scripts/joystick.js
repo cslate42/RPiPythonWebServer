@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 function createJoysticks() {
     var joysticks = {
-        drive: new MyJoystick("joystick-drive"),
+        // drive: new MyJoystick("joystick-drive"),
         camera: new MyJoystick("joystick-camera")
     };
     console.log(joysticks);

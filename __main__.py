@@ -11,6 +11,7 @@ from lib import basic_io
 def main():
     """Setup application"""
     try:
+        basic_io.setup()
         my_pi_server.setup()
     except KeyboardInterrupt:
         basic_io.shutdown()
