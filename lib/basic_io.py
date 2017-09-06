@@ -6,11 +6,9 @@ reference https://sourceforge.net/p/raspberry-gpio-python/wiki/pwmPins/
 import atexit
 import RPi.GPIO as GPIO
 
-MOTOR_L_F = 35
-MOTOR_L_B = 36
-MOTOR_R_F = 37
-MOTOR_R_B = 38
-LED_TEST = 3
+MOTOR_L = 35
+MOTOR_R = 36
+LASER = 3 # todo
 
 pwmPins = {}
 
@@ -21,18 +19,13 @@ def setup():
     print "-------------------------SETTING UP GPIO----------------------------"
     GPIO.setmode(GPIO.BOARD)
 
-    GPIO.setup(MOTOR_L_F, GPIO.OUT)
-    GPIO.setup(MOTOR_L_B, GPIO.OUT)
-    GPIO.setup(MOTOR_R_F, GPIO.OUT)
-    GPIO.setup(MOTOR_R_B, GPIO.OUT)
-    GPIO.setup(LED_TEST, GPIO.OUT)
-    # GPIO.setup(butPin, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Button pin set as input w/ pull-up
+    GPIO.setup(MOTOR_L, GPIO.OUT)
+    GPIO.setup(MOTOR_R, GPIO.OUT)
 
-    GPIO.output(MOTOR_L_F, False)
-    GPIO.output(MOTOR_L_B, False)
-    GPIO.output(MOTOR_R_F, False)
-    GPIO.output(MOTOR_R_B, False)
-    GPIO.output(LED_TEST, False)
+    GPIO.output(MOTOR_L, False)
+    GPIO.output(MOTOR_R, False)
+    GPIO.output(LASER, False)
+
     pwmPins.clear()
     return
 
