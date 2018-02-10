@@ -38,7 +38,6 @@ class WebServer(object):
             static_folder='public',
             static_url_path='/public'
         )
-        cls.flask._static_folder = config.ROOT_DIR + 'public'
         # set the secret
         # WTF is this again?!
         cls.flask.config['SECRET_KEY'] = cls.secret
@@ -71,20 +70,6 @@ class WebServer(object):
     def addRoutes(cls):
         # import all in the routes/ dir
         __import__('routes')
-        # handle static files
-        cls.addRoute(
-            '/public/<path:path>',  # '/public/<path:filename>',
-            cls.getStaticFile
-        )
-
-    def getStaticFile(varargin):
-        print 'getStaticFile'
-        print varargin
-        print nargin
-        print '\t' + filePath
-        print '\t' + os.exists(config.ROOT_DIR + 'static/' + filePath)
-        print '\n'
-        return flask.send_from_directory(config.ROOT_DIR + 'static/', filePath)
 
     @classmethod
     def addRoute(cls, path, callback):
