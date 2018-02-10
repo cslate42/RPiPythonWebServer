@@ -1,37 +1,42 @@
-#!/bin/bash python
+#!/usr/bin/python
+"""
+Startup the app and switch to virtualenv
+"""
+import os
+import sys
 
-# set this to 'threading', 'eventlet', or 'gevent'
-async_mode = 'threading'
 
-if async_mode == 'eventlet':
-    import eventlet
-    eventlet.monkey_patch()
-elif async_mode == 'gevent':
-    from gevent import monkey
-    monkey.patch_all()
+def isRunningVirtualenv():
+    """
+    Solution found from https://stackoverflow.com/a/1883251
+    """
+    return hasattr(sys, 'real_prefix')
 
-import app
-import myGlobals
 
-if __name__ == "__main__":
-    if async_mode == 'threading':
-        # deploy with Werkzeug
-        myGlobals.app.run(threaded=True)
-    elif async_mode == 'eventlet':
-        # deploy with eventlet
-        import eventlet
-        eventlet.wsgi.server(eventlet.listen(('', app.port)), myGlobals.app)
-    elif async_mode == 'gevent':
-        # deploy with gevent
-        from gevent import pywsgi
-        try:
-            from geventwebsocket.handler import WebSocketHandler
-            websocket = True
-        except ImportError:
-            websocket = False
-        if websocket:
-            pywsgi.WSGIServer(('', port), myGlobals.app, handler_class=WebSocketHandler).serve_forever()
-        else:
-            pywsgi.WSGIServer(('', port), myGlobals.app).serve_forever()
+def setupVirtualEnvironment():
+    if isRunningVirtualenv():
+        activatePath = os.path.dirname(__file__) + '/bin/activate_this.py'
+        execfile(activatePath, dict(__file__=activatePath))
+        isVirtualEnv = isRunningVirtualenv()
     else:
-        print('Unknown async_mode: ' + async_mode)
+        isVirtualEnv = True
+
+    return isVirtualEnv
+
+
+def main():
+    from include.WebServer import WebServer
+    WebServer.setupEnvironment()
+    WebServer.addRoutes()
+
+    try:
+        WebServer.run()
+    except KeyboardInterrupt:
+        WebServer.shutdown()
+
+
+if __name__ == '__main__':
+    if setupVirtualEnvironment():
+        main()
+    else:
+        raise RuntimeError("Unable to switch to virtualenv")
