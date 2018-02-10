@@ -14,6 +14,11 @@ def isRunningVirtualenv():
 
 
 def setupVirtualEnvironment():
+    # TODO allow both $ ./__main__.py and $ python RPiPythonWebServer/
+    # issue with os cwd or sys.path?
+    if os.path.dirname(__file__) != '.':
+        raise EnvironmentError("Must run from root of project ie: $ ./run.sh")
+
     if isRunningVirtualenv():
         activatePath = os.path.dirname(__file__) + '/bin/activate_this.py'
         execfile(activatePath, dict(__file__=activatePath))
