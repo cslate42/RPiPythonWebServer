@@ -7,5 +7,16 @@
 <body>
     <div class=page>
         <h1>Flaskr</h1>
+        <table>
+            {% for route in routes %}
+                <tr>
+                    <td>
+                        <a href="{{ route }}">
+                            {{ route }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 </body>

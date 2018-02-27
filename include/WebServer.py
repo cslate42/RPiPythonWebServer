@@ -3,7 +3,6 @@
 import flask
 import socketio
 import eventlet
-import os
 # import urllib
 # ========== MY MODULES =============
 import config
@@ -96,14 +95,24 @@ class WebServer(object):
             #     url
             # ))
             routes.append(url)
-        return routes
+        return sorted(routes)
 
     @classmethod
-    def render(cls, templatePath):
+    def render(cls, templatePath, args):
         """
+        https://stackoverflow.com/questions/9195455/how-to-document-a-method-with-parameters
         Use jinja to render an html page
+        cls class
+        :param str templatePath: the path to the template
+        :param **kwargs ?????????
+        :type kwargs ??????
+        :rtype None
+        :raises None
+        TODO parameters? , *args, **kwargs
         """
-        return flask.render_template(templatePath)
+        # from pprint import pprint
+        # pprint(args)
+        return flask.render_template(templatePath, **args)
 
 
 """

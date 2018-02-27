@@ -4,9 +4,9 @@ from include.WebServer import WebServer
 
 def index():
     routes = WebServer.getRoutes()
-    # print utils.debug.dump(routes)
-    print routes
-    return WebServer.render('index.html')
+    return WebServer.render('index.html', {
+        'routes': routes
+    })
 
 
 WebServer.addRoute('/', index)
