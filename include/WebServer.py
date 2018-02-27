@@ -3,135 +3,164 @@
 import flask
 import socketio
 import eventlet
-# import urllib
 # ========== MY MODULES =============
 import config
-# import utils.files as files
+
+__app = None
+__port = 8080
+__flask = None  # web server inst
+__sio = None
+__secret = 'secret!'
+__templateFolder = config.ROOT_DIR + 'templates/'
 
 
-class WebServer(object):
-    # ============ public variables ============
-    # asyncMode = 'eventlet'  # 'threading', 'eventlet', or 'gevent'
-    app = None
-    port = 8080
-    flask = None  # web server inst
-    sio = None
-    secret = 'secret!'
-    templateFolder = config.ROOT_DIR + 'templates/'
-    # routesDir = config.ROOT_DIR + 'routes/'
-    # ============ private variables ============
-
-    @classmethod
-    def setupEnvironment(cls):
-        # eventlet.monkey_patch()  # asyncMode eventlet setup
-        cls.__setupFlask()
-        cls.__setupSocketIO()
-        cls.__setupApp()
-
-    @classmethod
-    def __setupFlask(cls):
-        cls.flask = flask.Flask(
-            __name__,
-            # template_folder=cls.templateFolder,
-            root_path=config.ROOT_DIR,
-            static_folder='public',
-            static_url_path='/public'
-        )
-        # set the secret
-        # WTF is this again?!
-        cls.flask.config['SECRET_KEY'] = cls.secret
-
-    @classmethod
-    def __setupSocketIO(cls):
-        cls.sio = socketio.Server()
-
-    @classmethod
-    def __setupApp(cls):
-        cls.app = socketio.Middleware(cls.sio, cls.flask)
-
-    @classmethod
-    def run(cls):
-        eventlet.wsgi.server(
-            eventlet.listen(('', cls.port)),
-            cls.app
-        )
-
-    @classmethod
-    def shutdown(cls):
-        """ see https://stackoverflow.com/a/17053522 """
-        print 'shutting down'
-        shutdown = flask.request.environ.get('werkzeug.server.shutdown')
-        if shutdown is None:
-            raise RuntimeError('Not running with the Werkzeug Server')
-        shutdown()
-
-    @classmethod
-    def addRoutes(cls):
-        # import all in the routes/ dir
-        __import__('routes')
-
-    @classmethod
-    def addRoute(cls, path, callback):
-        if type(path) is not str:
-            raise TypeError('path must be str')
-        elif not callable(callback):
-            raise ValueError('callback must be callable')
-        cls.flask.add_url_rule(path, callback.__name__, callback)
-
-    @classmethod
-    def getRoutes(cls):
-        routes = []
-        for rule in WebServer.flask.url_map.iter_rules():
-            if rule.endpoint == 'static':
-                continue
-            options = {}
-            for arg in rule.arguments:
-                options[arg] = "[{0}]".format(arg)
-            # methods = ','.join(rule.methods)
-            url = flask.url_for(rule.endpoint, **options)
-            # line = urllib.unquote("{:50s} {:20s} {}".format(
-            #     rule.endpoint,
-            #     methods,
-            #     url
-            # ))
-            routes.append(url)
-        return sorted(routes)
-
-    @classmethod
-    def render(cls, templatePath, args):
-        """
-        https://stackoverflow.com/questions/9195455/how-to-document-a-method-with-parameters
-        Use jinja to render an html page
-        cls class
-        :param str templatePath: the path to the template
-        :param **kwargs ?????????
-        :type kwargs ??????
-        :rtype None
-        :raises None
-        TODO parameters? , *args, **kwargs
-        """
-        # from pprint import pprint
-        # pprint(args)
-        return flask.render_template(templatePath, **args)
+def setup():
+    """
+    Initialize the module
+    """
+    __setupEnvironment()
+    __setupRoutes()
 
 
-"""
-def list_routes():
-    output = []
-    for rule in WebServer.flask.url_map.iter_rules():
+def __setupEnvironment():
+    """
+    Setup the webserver environment
+        Create the web server application
+        handle socket communication
+        create the app instance
+    """
+    __setupFlask()
+    __setupSocketIO()
+    __setupApp()
+
+
+def __setupFlask():
+    """
+    Create the flask web server
+    """
+    global __flask
+    __flask = flask.Flask(
+        __name__,
+        # template_folder=cls.templateFolder,
+        root_path=config.ROOT_DIR,
+        static_folder='public',
+        static_url_path='/public'
+    )
+    # set the secret
+    # WTF is this again?!
+    __flask.config['SECRET_KEY'] = __secret
+
+
+def __setupSocketIO():
+    """
+    Setup the socket io server for low latency communications
+    """
+    global __sio
+    __sio = socketio.Server()
+
+
+def __setupApp():
+    """
+    Setup the flask application handler
+    """
+    global __app
+    __app = socketio.Middleware(__sio, __flask)
+
+
+def __setupRoutes():
+    """
+    Setup the initial routes by scanning the routes directory
+    """
+    # import all in the routes/ dir
+    __import__('routes')
+
+
+def getSocketIO():
+    """
+    Get the socket io object
+    Returns:
+        socketio.Server: the instance
+    """
+    return __sio
+
+
+def getApp():
+    """
+    Get the web app
+    Returns:
+        socketio.Middleware: the instance
+    """
+    return __app
+
+
+def run():
+    """
+    Run the web server on the port
+    """
+    eventlet.wsgi.server(
+        eventlet.listen(('', __port)),
+        __app
+    )
+
+
+def shutdown():
+    """
+    Handle the shutdown function
+    see https://stackoverflow.com/a/17053522
+    """
+    print 'shutting down'
+    shutdown = flask.request.environ.get('werkzeug.server.shutdown')
+    if shutdown is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    shutdown()
+
+
+def addRoute(path, callback):
+    """
+    Dynamically add a route to the web server
+    Args:
+        path (str): the path to use for the template
+        callback (def): the template handler
+    """
+    if type(path) is not str:
+        raise TypeError('path must be str')
+    elif not callable(callback):
+        raise ValueError('callback must be callable')
+    __flask.add_url_rule(path, callback.__name__, callback)
+
+
+def getRoutes():
+    """
+    Get a list of all the routes
+    Returns:
+        list: of routes sorted alphabetically
+    """
+    routes = []
+    for rule in __flask.url_map.iter_rules():
+        if rule.endpoint == 'static':
+            continue
         options = {}
         for arg in rule.arguments:
             options[arg] = "[{0}]".format(arg)
-        methods = ','.join(rule.methods)
+        # methods = ','.join(rule.methods)
         url = flask.url_for(rule.endpoint, **options)
-        # url = rule.endpoint
-        line = urllib.unquote("{:50s} {:20s} {}".format(
-            rule.endpoint,
-            methods,
-            url
-        ))
-        output.append(line)
+        # line = urllib.unquote("{:50s} {:20s} {}".format(
+        #     rule.endpoint,
+        #     methods,
+        #     url
+        # ))
+        routes.append(url)
+    return sorted(routes)
 
-    for line in sorted(output):
-        print line
-"""
+
+def render(templatePath, args):
+    """
+    https://stackoverflow.com/questions/9195455/how-to-document-a-method-with-parameters
+    Use jinja to render an html page
+    Args:
+        templatePath (str): the path to the template
+        args (dict): key value pairs which are used in the template
+    """
+    # from pprint import pprint
+    # pprint(args)
+    return flask.render_template(templatePath, **args)

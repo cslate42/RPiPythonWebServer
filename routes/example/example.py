@@ -1,5 +1,4 @@
-from include.WebServer import WebServer
-
+import include.WebServer as WebServer
 
 def example():
     return 'example'

@@ -1,4 +1,4 @@
-from include.WebServer import WebServer
+import include.WebServer as WebServer
 # import utils.debug
 
 
