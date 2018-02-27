@@ -115,18 +115,33 @@ def shutdown():
     shutdown()
 
 
-def addRoute(path, callback):
+def addRoute(path, callback=None):
     """
     Dynamically add a route to the web server
+    Either call directly or use a decorator
+    direct:    Webserver.addRoute(path, callback)
+    decorator: @Webserver.addRoute('/index.html')
+                   def asdf(): ...
     Args:
         path (str): the path to use for the template
         callback (def): the template handler
     """
-    if type(path) is not str:
-        raise TypeError('path must be str')
-    elif not callable(callback):
-        raise ValueError('callback must be callable')
-    __flask.add_url_rule(path, callback.__name__, callback)
+    # add decorator support ex
+    def __decorator(func):
+        return __addRouteHandler(path, func)
+
+    def __addRouteHandler(path, func):
+        if type(path) is not str:
+            raise TypeError('path must be str')
+        elif not callable(func):
+            raise ValueError('callback must be callable')
+        __flask.add_url_rule(path, func.__name__, func)
+
+    # support decorator and direct function call
+    if callable(callback):
+        return __addRouteHandler(path, callback)
+    else:
+        return __decorator
 
 
 def getRoutes():

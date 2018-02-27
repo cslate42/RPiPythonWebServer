@@ -1,3 +1,8 @@
+
+rapsberry pi + python server + socketio
+
+forked from https://github.com/miguelgrinberg/python-socketio
+
 TODO finish
 
 The goal of the project is to develop a streamlined web interface to the
