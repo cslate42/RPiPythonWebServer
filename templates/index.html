@@ -1,22 +1,20 @@
-<!doctype html>
-<head>
-    <title>Flaskr</title>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class=page>
-        <h1>Flaskr</h1>
-        <table>
-            {% for route in routes %}
-                <tr>
-                    <td>
-                        <a href="{{ route }}">
-                            {{ route }}
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
-</body>
+{% extends "__layout.html" %}
+{% block title %}Latency{% endblock %}
+{% block content %}
+<h1>Flaskr</h1>
+<table>
+    {% for route in routes %}
+        <tr>
+            <td>
+                <a href="{{ route }}">
+                    {{ route }}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<img src="{{ url_for('static', filename='imgs/pinout.png') }}" />
+<img src="{{ url_for('static', filename='imgs/pinout2.webp') }}" />
+
+{% endblock %}

@@ -12,6 +12,7 @@ __flask = None  # web server inst
 __sio = None
 __secret = 'secret!'
 __templateFolder = config.ROOT_DIR + 'templates/'
+SOCKET_IO_NAMESPACE = '/socketio'
 
 
 def setup():
@@ -115,6 +116,33 @@ def shutdown():
     shutdown()
 
 
+def sioHandler(msg, callback=None):
+    """
+    Socket IO msg handler
+    """
+    def __registerSioHandler(msg, func):
+        __sio.on(msg, func, namespace=SOCKET_IO_NAMESPACE)
+
+    def __decorator(func):
+        return __registerSioHandler(msg, func)
+    # support decorator and direct function call
+    if callable(callback):
+        __registerSioHandler(msg, callback)
+    else:
+        return __decorator
+
+
+def sioEmit(msg, data, room=None, skip_sid=None):
+    """
+    Socket IO emit to client
+    :param msg
+    :param data
+    :param room commonly sid
+    :param skip_sid
+    """
+    __sio.emit(msg, data, room, skip_sid, namespace='/socketio')
+
+
 def addRoute(path, callback=None):
     """
     Dynamically add a route to the web server
@@ -168,7 +196,7 @@ def getRoutes():
     return sorted(routes)
 
 
-def render(templatePath, args):
+def render(templatePath, args={}):
     """
     https://stackoverflow.com/questions/9195455/how-to-document-a-method-with-parameters
     Use jinja to render an html page
@@ -178,4 +206,6 @@ def render(templatePath, args):
     """
     # from pprint import pprint
     # pprint(args)
+    args['pages'] = getRoutes()
+    print args
     return flask.render_template(templatePath, **args)

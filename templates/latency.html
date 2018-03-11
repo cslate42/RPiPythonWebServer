@@ -1,0 +1,60 @@
+{% extends "__layout.html" %}
+{% block title %}Latency{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/smoothie/1.27.0/smoothie.js"></script>
+{% endblock %}
+{% block content %}
+<h1>Socket.IO Latency <span id="latency"></span></h1>
+<h2 id="transport">(connecting)</h2>
+<canvas id="chart" class="col-xs-12" height="200"></canvas>
+
+<script>
+// socket
+var char = $('chart').get(0);
+sio.on('connect', function() {
+    if (chart.getContext) {
+        render();
+        window.onresize = render;
+    }
+    send();
+});
+sio.on('pong', function() {
+    var latency = new Date - last;
+    $('#latency').text(latency + 'ms');
+    if (time)
+    time.append(+new Date, latency);
+    setTimeout(send, 100);
+});
+sio.on('disconnect', function() {
+    if (smoothie)
+    smoothie.stop();
+    $('#transport').text('(disconnected)');
+});
+
+var last;
+function send() {
+    last = new Date;
+    sio.emit('ping');
+    $('#transport').text(sio.io.engine.transport.name);
+}
+
+// chart
+var smoothie;
+var time;
+function render() {
+    if (smoothie)
+    smoothie.stop();
+    chart.width = document.body.clientWidth;
+    smoothie = new SmoothieChart();
+    smoothie.streamTo(chart, 1000);
+    time = new TimeSeries();
+    smoothie.addTimeSeries(time, {
+        strokeStyle: 'rgb(255, 0, 0)',
+        fillStyle: 'rgba(255, 0, 0, 0.4)',
+        lineWidth: 2
+    });
+}
+</script>
+
+{% endblock %}

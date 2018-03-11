@@ -1,4 +1,11 @@
+body { margin: 0px; }
+body .gtco-nav { position: initial; }
+
+.gtco-container { max-width: none; }
+.nav-logo img { width: auto; height: 30px; }
+
 h1 { color: red; }
+#content { padding: 10px; }
 
 div#topnav { font-size: 11px; }
 

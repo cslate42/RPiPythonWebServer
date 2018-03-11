@@ -1,8 +1,9 @@
-#include "utils/error.h"
 #include "utils/socket.h"
-
-#include "webInterface.h"
+#include "utils/error.h"
 
 int main(int argc, char *argv[]) {
 
+    while(true) {
+
+    }
 }

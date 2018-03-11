@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- Tempalte from http://www.free-css.com/free-css-templates/page225/honest -->
+<html>
+    <head>
+        {% block head %}
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='theme/style.css') }}">
+        <script type="text/javascript" src="{{ url_for('static', filename='theme/sticky.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='assets/jquery-2.0.3.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='assets/socket.io-1.3.5.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/general.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/r-pi.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='assets/bootstrap.min.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+
+        {# use '{{ super() }}' if you want to add to the block #}
+        <title>{% block title %}RPiPythonWebServer with Flask &amp; Socketio{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="gtco-nav sticky-banner" role="navigation">
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="nav-logo text-center col-xs-1">
+                        <img src="{{ url_for('static', filename='imgs/rpi.png') }}" />
+                    </div>
+                    <div class="col-xs-11 text-left menu-1">
+                        <ul>
+                            {% for page in pages %}
+                                <li>
+                                    <a href="{{ page }}" />{{ page }}</a>
+                                </li>
+                            {% endfor %}
+                            <!--<li class="active">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="has-dropdown">
+                                <a href="services.html">Services</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">Branding</a></li>
+                                </ul>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="footer">{% block footer %}{% endblock %}</div>
+    </body>
+</html>
