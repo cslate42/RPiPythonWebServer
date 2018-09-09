@@ -7,6 +7,16 @@ Using google python documentation
 import os
 import sys
 
+def execfile(filepath, execGlobals=None, execLocals=None):
+    if execGlobals is None:
+        execGlobals = {}
+    execGlobals.update({
+        "__file__": filepath,
+        "__name__": "__main__",
+    })
+    with open(filepath, 'rb') as file:
+        exec(compile(file.read(), filepath, 'exec'), execGlobals, execLocals)
+
 
 def isRunningVirtualenv():
     """
@@ -26,10 +36,6 @@ def setupVirtualEnvironment():
     Raises:
         EnvironmentError: Must be running app from app root dir
     """
-    # TODO allow both $ ./__main__.py and $ python RPiPythonWebServer/
-    # issue with os cwd or sys.path?
-    if os.path.dirname(__file__) != '.':
-        raise EnvironmentError("Must run from root of project ie: $ ./run.sh")
 
     if isRunningVirtualenv():
         activatePath = os.path.dirname(__file__) + '/bin/activate_this.py'

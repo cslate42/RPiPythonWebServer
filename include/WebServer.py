@@ -109,7 +109,7 @@ def shutdown():
     Handle the shutdown function
     see https://stackoverflow.com/a/17053522
     """
-    print 'shutting down'
+    print('shutting down')
     shutdown = flask.request.environ.get('werkzeug.server.shutdown')
     if shutdown is None:
         raise RuntimeError('Not running with the Werkzeug Server')
@@ -207,5 +207,5 @@ def render(templatePath, args={}):
     # from pprint import pprint
     # pprint(args)
     args['pages'] = getRoutes()
-    print args
+    print(args)
     return flask.render_template(templatePath, **args)

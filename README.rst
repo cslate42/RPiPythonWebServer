@@ -22,3 +22,7 @@ Built and tested on a 64x machine running
 The project is running in a virtualenv
     include/python3.5m may need to be linked once on install
     the current link is to: /usr/include/python3.5m
+
+Port forward (none sudo access but 80 to 8080)
+   # https://www.eclipse.org/jetty/documentation/9.4.x/setting-port80-access.html
+   $ sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080

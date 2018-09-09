@@ -1,0 +1,20 @@
+{% extends "__layout.html" %}
+{% block title %}Smart Mirror{% endblock %}
+{% block content %}
+<div>
+	<div>
+	</div>
+</div>
+<table>
+    {% for route in routes %}
+        <tr>
+            <td>
+                <a href="{{ route }}">
+                    {{ route }}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
